@@ -11,7 +11,10 @@ app.set('view engine','ejs');
 app.set('views','views');
 
 const homeRouter=require('./routes/home.route')
+
+const productRouter=require('./routes/product.route')
 app.use('/', homeRouter)
+app.use('/product', productRouter)
 
 
 
