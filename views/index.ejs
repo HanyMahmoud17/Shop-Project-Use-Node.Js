@@ -13,27 +13,33 @@
         <input type="submit" value="filter" class="btn btn-primary">
     </form>
 
-    <div class="row">
-        <% for(let product of products) { %>
-            <!-- col-12 == in small screen to take all 12 col  -->
-        <div class="col col-12 col-md-6 col-lg-4 col-xl-3">
-            <div class="card" style="width: 18rem;">
-                <img src="<%= product.image%>" class="card-img-top">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    <a href="/product/<%= product._id%>">
-                        <%= product.name%>
-                    </a>
-                    <p>Price : <%= product.price%> $</p>
-                  </h5>
-                  <form action="/cart" method="post" class="form-control">
-                    <input type="number" name="amount" >
-                    <input type="submit" name="addToCart" class="btn btn-primary">
-                  </form>
+    <% if(products.length ===0 ) {%>
+      <div class="alert alert-danger">
+        there is no product selected
+      </div>
+      <%} else {%>
+        <div class="row">
+          <% for(let product of products) { %>
+              <!-- col-12 == in small screen to take all 12 col  -->
+          <div class="col col-12 col-md-6 col-lg-4 col-xl-3">
+              <div class="card" style="width: 18rem;">
+                  <img src="<%= product.image%>" class="card-img-top">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <a href="/product/<%= product._id%>">
+                          <%= product.name%>
+                      </a>
+                      <p>Price : <%= product.price%> $</p>
+                    </h5>
+                    <form action="/cart" method="post" class="form-control">
+                      <input type="number" name="amount" >
+                      <input type="submit" name="addToCart" class="btn btn-primary">
+                    </form>
+                  </div>
                 </div>
-              </div>
-        </div>
+          </div>
+          <%}%>
+      </div>
         <%}%>
-    </div>
 </div>
 <%- include('parts/footer')%>

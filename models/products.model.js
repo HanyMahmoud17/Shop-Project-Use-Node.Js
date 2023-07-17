@@ -41,13 +41,12 @@ exports.getProductById = id => {
   });
 };
 
-// exports.getProductById=(id)=>{
-//   return new Promise((resolve,reject)=>{
-//   mongoose.connect(DB_URL).then(()=>{
-//   return Product.findById(id)
-//   }).then(product=>{
-//   mongoose.disconnect()
-//   resolve(product)
-//   }).catch(err=> reject(err))
-//   })
-//   }
+exports.getFirstProduct = () => {
+  return new Promise((resolve, reject) => {
+    Product.findOne()
+      .then(product => {
+        resolve(product);
+      })
+      .catch(err => reject(err));
+  });
+};
