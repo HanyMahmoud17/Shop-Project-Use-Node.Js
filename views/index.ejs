@@ -2,6 +2,17 @@
 <%- include('parts/navbar')%>
 
 <div class="container">
+
+    <form action="/" method="GET">
+        <select class="form-control" name="category" id="">
+            <option value="all">All</option>
+            <option value="clothes">Clothes</option>
+            <option value="phones">Phones</option>
+            <option value="laptops">Laptops</option>
+        </select>
+        <input type="submit" value="filter" class="btn btn-primary">
+    </form>
+
     <div class="row">
         <% for(let product of products) { %>
             <!-- col-12 == in small screen to take all 12 col  -->
