@@ -40,21 +40,18 @@ exports.login = (email,password) => {
     User.findOne({ email: email })
       .then(user => {
         if(!user){
-
             reject('email not found')
         } else {
             // this return boolean value this compare between the value that you pass and the value in data 
             bcrypt.compare(password, user.password).then((same) => {
             if(!same){
-
                 reject('password is not correct')
             } else {
                 resolve(user._id)
             }
           })
          }
-      })
-      
-  }).catch(err => reject(err));
+      }).catch(err => reject(err));
+  })
 };
 

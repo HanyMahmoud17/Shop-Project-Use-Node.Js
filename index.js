@@ -2,10 +2,14 @@
 const express= require('express');
 const app=express();
 const path= require('path');
+// import flash session
+const flash= require('connect-flash');
 
 // make serv to my static files
 app.use(express.static(path.join(__dirname,"assets")))
 app.use(express.static(path.join(__dirname,"images")))
+// use flash
+app.use(flash())
 
 // use session
 const session=require('express-session')

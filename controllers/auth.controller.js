@@ -13,7 +13,9 @@ exports.postSignup=(req,res,next)=>{
 }
 
 exports.getLogin=(req,res,next)=>{
-    res.render('login')
+    res.render('login',{
+        authError: req.flash('authError')[0]
+    })
 }
 
 exports.postLogin=(req,res,next)=>{
@@ -25,7 +27,7 @@ exports.postLogin=(req,res,next)=>{
     })
     .catch(err=>
         {
-            console.log(err);
+            req.flash('authError', err)
             res.redirect('/login')
         });
 }
