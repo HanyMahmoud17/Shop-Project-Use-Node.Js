@@ -18,5 +18,8 @@ bodyParser.urlencoded({ extended: true }),
 authController.postLogin
 )
 
+// if the user make any of post or get to handlr this router
+router.all('/logout', authController.logout)
+
 
 module.exports = router
