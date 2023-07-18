@@ -16,7 +16,6 @@ exports.createNewUser = (username,email,password) => {
     User.findOne({email: email})
       .then(user => {
         if(user){
-            alert("User already exists")
             reject('email is already in use')
         } else {
             return bcrypt.hash(password,10)
@@ -36,32 +35,26 @@ exports.createNewUser = (username,email,password) => {
   });
 };
 
-exports.getProductByCategory = category => {
+exports.login = (email,password) => {
   return new Promise((resolve, reject) => {
-    Product.find({ category: category })
-      .then(products => {
-        resolve(products);
+    User.findOne({ email: email })
+      .then(user => {
+        if(!user){
+
+            reject('email not found')
+        } else {
+            // this return boolean value this compare between the value that you pass and the value in data 
+            bcrypt.compare(password, user.password).then((same) => {
+            if(!same){
+
+                reject('password is not correct')
+            } else {
+                resolve(user._id)
+            }
+          })
+         }
       })
-      .catch(err => reject(err));
-  });
+      
+  }).catch(err => reject(err));
 };
 
-exports.getProductById = id => {
-  return new Promise((resolve, reject) => {
-    Product.findById(id)
-      .then(product => {
-        resolve(product);
-      })
-      .catch(err => reject(err));
-  });
-};
-
-exports.getFirstProduct = () => {
-  return new Promise((resolve, reject) => {
-    Product.findOne()
-      .then(product => {
-        resolve(product);
-      })
-      .catch(err => reject(err));
-  });
-};
