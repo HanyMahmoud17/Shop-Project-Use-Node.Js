@@ -23,6 +23,8 @@ router.get('/login',authController.getLogin )
 
 router.post('/login',
 bodyParser.urlencoded({ extended: true }),
+check('email').not().isEmpty().withMessage('Enter your email').isEmail().withMessage('Enter valid Email'),
+check('password').not().isEmpty().withMessage('Enter Password').isLength({min: 6}).withMessage('min length is 6'),
 authController.postLogin
 )
 

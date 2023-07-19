@@ -23,12 +23,15 @@ exports.postSignup=(req,res,next)=>{
 }
 
 exports.getLogin=(req,res,next)=>{
+    // console.log(req.flash('validationErrors'));
     res.render('login',{
-        authError: req.flash('authError')[0]
+        authError: req.flash('authError')[0],
+        validationErrors: req.flash('validationErrors')
     })
 }
 
 exports.postLogin=(req,res,next)=>{
+    if(validationResult(req).isEmpty()) {
     authModel.login(req.body.email,req.body.password)
     .then((id)=>
     {
@@ -40,6 +43,10 @@ exports.postLogin=(req,res,next)=>{
             req.flash('authError', err)
             res.redirect('/login')
         });
+    } else { 
+        req.flash('validationErrors',validationResult(req).array());
+        res.redirect('/login');
+    }
 }
 
 exports.logout=(req,res,next)=>{

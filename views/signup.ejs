@@ -780,28 +780,28 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 			<div class="agileits-top">
 				<form action="/signup" method="post">
 					<input class="text" type="text" name="username" placeholder="Username" required="">
-					<% let usernameError=validationErrors.find(err=>err.param=='username') %>
+					<% let usernameError=validationErrors.find(err=>err.path=='username') %>
           <% if(usernameError) {%>
             <p class="alert alert-danger">
               <%= usernameError.msg%>
             </p>  
           <%}%>
           <input class="text email" type="email" name="email" placeholder="Email" required="">
-					<% let emailError=validationErrors.find(err=>err.param=='email') %>
+					<% let emailError=validationErrors.find(err=>err.path=='email') %>
           <% if(emailError) {%>
             <p class="alert alert-danger">
               <%= emailError.msg%>
             </p>  
           <%}%>
           <input class="text" type="password" name="password" placeholder="Password" required="">
-          <% let passwordError=validationErrors.find(err=>err.param=='password') %>
+          <% let passwordError=validationErrors.find(err=>err.path=='password') %>
           <% if(emailError) {%>
             <p class="alert alert-danger">
               <%= passwordError.msg%>
             </p>  
           <%}%>
           <input class="text w3lpass" type="password" name="confirmPassword" placeholder="Confirm Password" required="">
-					<% let confirmPasswordError=validationErrors.find(err=>err.param=='confirmPassword') %>
+					<% let confirmPasswordError=validationErrors.find(err=>err.path=='confirmPassword') %>
           <% if(confirmPasswordError) {%>
             <p class="alert alert-danger">
               <%= confirmPasswordError.msg%>
