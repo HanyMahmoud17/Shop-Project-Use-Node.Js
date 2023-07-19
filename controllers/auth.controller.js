@@ -26,7 +26,8 @@ exports.getLogin=(req,res,next)=>{
     // console.log(req.flash('validationErrors'));
     res.render('login',{
         authError: req.flash('authError')[0],
-        validationErrors: req.flash('validationErrors')
+        validationErrors: req.flash('validationErrors'),
+        isUser:false
     })
 }
 
