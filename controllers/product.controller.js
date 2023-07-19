@@ -4,7 +4,8 @@ exports.getProduct=(req,res,next)=>{
     productModel.getFirstProduct().then((product)=>{
         // console.log("product",product);
         res.render('productDetails', {
-            product: product
+            product: product,
+            isUser:true
         })
     })
 
@@ -16,7 +17,8 @@ exports.getProductById=(req,res,next)=>{
     productModel.getProductById(id).then((product)=>{
         // console.log("product",product);
         res.render('productDetails', {
-            product: product
+            product: product,
+            isUser:true
         })
     })
 
