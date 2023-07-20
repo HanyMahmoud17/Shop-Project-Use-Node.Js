@@ -12,6 +12,13 @@
         </select>
         <input type="submit" value="filter" class="btn btn-primary">
     </form>
+<br>
+    <% if(validationError) {%>
+      <p class="alert alert-danger">
+        <%= validationError.msg%>
+      </p>
+      <%}%>
+      
 
     <% if(products.length ===0 ) {%>
       <div class="alert alert-danger">
@@ -33,6 +40,10 @@
                     </h5>
                     <form action="/cart" method="post" class="form-control">
                       <input type="number" name="amount" >
+                      <input type="hidden" name="name"  value="<%= product.name%>">
+                      <input type="hidden" name="price"  value="<%= product.price%>">
+                      <input type="hidden" name="productId"  value="<%= product._id%>">
+                      <input type="hidden" name="redirectTo" value="/">
                       <input type="submit" name="addToCart" class="btn btn-primary">
                     </form>
                   </div>

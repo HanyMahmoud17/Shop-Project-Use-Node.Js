@@ -5,7 +5,8 @@ exports.getProduct=(req,res,next)=>{
         // console.log("product",product);
         res.render('productDetails', {
             product: product,
-            isUser:true
+            isUser:true,
+            validationError: req.flash('validationErrors')[0]
         })
     })
 
@@ -18,7 +19,8 @@ exports.getProductById=(req,res,next)=>{
         // console.log("product",product);
         res.render('productDetails', {
             product: product,
-            isUser:true
+            isUser:true,
+            validationError: req.flash('validationErrors')[0]
         })
     })
 
