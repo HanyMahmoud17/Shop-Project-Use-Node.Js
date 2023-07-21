@@ -7,8 +7,8 @@ exports.getCart=(req,res,next)=>{
         // console.log("product",product);
         res.render('cart', {
             items: items,
-            isUser:true
-            // validationError: req.flash('validationErrors')[0]
+            isUser:true,
+            validationError: req.flash('validationErrors')[0]
         })
     }).catch(err=>console.log(err))
 
@@ -18,6 +18,7 @@ exports.postCart=(req,res,next)=>{
     if(validationResult(req).isEmpty() ){
         cartModel.addNewItem({
             name: req.body.name,
+            image: req.body.image,
             price: req.body.price,
             productId: req.body.productId,
             amount: req.body.amount,
@@ -31,6 +32,7 @@ exports.postCart=(req,res,next)=>{
         res.redirect(req.body.redirectTo)
     }
 }
+
 
 exports.postSave=(req,res,next)=>{
     if(validationResult(req).isEmpty() ){
@@ -50,4 +52,11 @@ exports.postDelete=(req,res,next)=>{
         cartModel.deleteItem(req.body.cartId).then(()=>{
             res.redirect('/cart')
         }).catch(err => console.log(err))
+}
+
+exports.postDeleteAll=(req,res,next)=>{
+    // console.log(req.body.items);
+    cartModel.deleteAllItems(req.session.userId).then(()=>{
+        res.redirect('/cart')
+    }).catch(err => console.log(err))
 }

@@ -3,6 +3,7 @@ const db = require('../Config/connectDB');
 const DB_URL = 'mongodb://127.0.0.1:27017/online-shop';
 const cartSchema = mongoose.Schema({
   name: String,
+  image: String,
   price: Number,
   amount: Number,
   userId: String,
@@ -14,16 +15,27 @@ const CartItem = mongoose.model('cart', cartSchema);
 
 exports.addNewItem = (data) => {
   return new Promise((resolve, reject) => {
-    let item=new CartItem(data);
-    return item.save()
-      .then(() => {
-        resolve();
-      })
-      .catch(err => reject(err));
+    CartItem.findOne({ productId: data.productId }).then((existingItem) => {
+      if (existingItem) {
+        existingItem.amount = Number(data.amount) + existingItem.amount;
+        existingItem.save().then(() => {
+          resolve();
+        }).catch((err) => {
+          reject(err);
+        });
+      } else {
+        let item = new CartItem(data);
+        item.save().then(() => {
+          resolve();
+        }).catch((err) => {
+          reject(err);
+        });
+      }
+    }).catch((err) => {
+      reject(err);
+    });
   });
 };
-
-
 
 exports.getItemsByUser = userId => {
   return new Promise((resolve, reject) => {
@@ -35,15 +47,6 @@ exports.getItemsByUser = userId => {
       .catch(err => reject(err));
   });
 };
-// exports.getProductByCategory = category => {
-//   return new Promise((resolve, reject) => {
-//     Product.find({ category: category })
-//       .then(products => {
-//         resolve(products);
-//       })
-//       .catch(err => reject(err));
-//   });
-// };
 
 exports.editItem = (id,newData) => {
   return new Promise((resolve, reject) => {
@@ -62,5 +65,15 @@ exports.deleteItem = (id) => {
         resolve();
       })
       .catch(err => reject(err));
+  });
+};
+
+exports.deleteAllItems = (userId) => {
+  return new Promise((resolve, reject) => {
+    CartItem.deleteMany({ userId: userId })
+      .then(() => {
+        resolve();
+      })
+      .catch((err) => reject(err));
   });
 };

@@ -1,0 +1,18 @@
+<%- include('parts/header')%>
+<%- include('parts/navbar')%>
+
+<div class="container">
+  <form method="post" action="/order/save" class="text-center">
+    <input type="text" name="orderAddress" class="form-control">
+  
+    <input type="hidden" name="cartId" value="<%= itemData.cartId %>">
+    <input type="hidden" name="name" value="<%= itemData.name %>">
+    <input type="hidden" name="price" value="<%= itemData.price %>">
+    <input type="hidden" name="amount" value="<%= itemData.amount %>">
+    <input type="hidden" name="image" value="<%= itemData.image %>">
+    <input type="hidden" name="productId" value="<%= itemData.productId %>">
+  
+    <button type="submit" style="position: absolute;right: 200px;" class="btn btn-danger">Add Order</button>
+  </form>
+</div>
+<%- include('parts/footer')%>

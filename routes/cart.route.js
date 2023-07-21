@@ -26,5 +26,10 @@ authGuard.isAuth
 ,bodyParser.urlencoded({ extended: true}),
 cartController.postDelete
 )
+router.post('/delete-all',
+authGuard.isAuth
+,bodyParser.urlencoded({ extended: true}),
+cartController.postDeleteAll
+)
 
 module.exports = router

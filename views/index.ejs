@@ -41,6 +41,7 @@
                     <form action="/cart" method="post" class="form-control">
                       <input type="number" name="amount" >
                       <input type="hidden" name="name"  value="<%= product.name%>">
+                      <input type="hidden" name="image"  value="<%= product.image%>">
                       <input type="hidden" name="price"  value="<%= product.price%>">
                       <input type="hidden" name="productId"  value="<%= product._id%>">
                       <input type="hidden" name="redirectTo" value="/">
