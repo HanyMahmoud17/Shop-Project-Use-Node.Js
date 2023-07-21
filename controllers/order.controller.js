@@ -13,6 +13,7 @@ exports.displayOrderVerificationPage=(req,res,next)=>{
           };
         res.render('verifyOrder', {
             isUser:true,
+            isAdmin:req.session.isAdmin,
             validationError: req.flash('validationErrors')[0],
             itemData 
         })
@@ -28,6 +29,7 @@ exports.getOrder = (req, res, next) => {
         res.render('order', {
             items: items,
             isUser:true,
+            isAdmin:req.session.isAdmin,
             validationError: req.flash('validationErrors')[0]
         })
     }).catch(err=>console.log(err))

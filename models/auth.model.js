@@ -7,6 +7,10 @@ const authSchema = mongoose.Schema({
   username: String,
   email: String,
   password: String,
+  isAdmin:{
+    type: Boolean,
+    default: false,
+  }
 });
 
 const User = mongoose.model('user', authSchema);
@@ -47,7 +51,10 @@ exports.login = (email,password) => {
             if(!same){
                 reject('password is not correct')
             } else {
-                resolve(user._id)
+                resolve({
+                  id:user._id,
+                  isAdmin:user.isAdmin
+                })
             }
           })
          }

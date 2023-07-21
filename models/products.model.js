@@ -50,3 +50,23 @@ exports.getFirstProduct = () => {
       .catch(err => reject(err));
   });
 };
+
+exports.addProduct = (item) => {
+  // console.log(p);
+  return new Promise((resolve, reject) => {
+    const product= new Product({
+      name: item.name,
+      price: item.price,
+      category: item.category,
+      description: item.description,
+      image: item.image,
+      
+    })
+    return product.save()
+      .then(product => {
+        resolve(product);
+      })
+      .catch(err => reject(err));
+  });
+};
+
