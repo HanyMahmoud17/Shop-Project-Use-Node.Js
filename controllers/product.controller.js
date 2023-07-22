@@ -7,7 +7,8 @@ exports.getProduct=(req,res,next)=>{
             product: product,
             isUser:req.session.isUser,
             isAdmin:req.session.isAdmin,
-            validationError: req.flash('validationErrors')[0]
+            validationError: req.flash('validationErrors')[0],
+            pageTitle:'Product',
         })
     })
 
@@ -22,7 +23,9 @@ exports.getProductById=(req,res,next)=>{
             product: product,
             isUser:req.session.isUser,
             isAdmin:req.session.isAdmin,
-            validationError: req.flash('validationErrors')[0]
+            validationError: req.flash('validationErrors')[0],
+            pageTitle:'Product Details',
+
         })
     })
 

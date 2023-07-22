@@ -9,9 +9,11 @@ exports.getCart=(req,res,next)=>{
             items: items,
             isUser:true,
             isAdmin:req.session.isAdmin,
-            validationError: req.flash('validationErrors')[0]
+            validationError: req.flash('validationErrors')[0],
+            pageTitle:'cart',
+
         })
-    }).catch(err=>console.log(err))
+    }).catch(err=>next(err))
 
 }
 
@@ -27,7 +29,7 @@ exports.postCart=(req,res,next)=>{
             timestamp: Date.now()
         }).then(()=>{
             res.redirect('/cart')
-        }).catch(err => console.log(err))
+        }).catch(err => next(err));
     } else {
         req.flash('validationErrors',validationResult(req).array())
         res.redirect(req.body.redirectTo)
@@ -42,7 +44,7 @@ exports.postSave=(req,res,next)=>{
             timestamp: Date.now()
         }).then(()=>{
             res.redirect('/cart')
-        }).catch(err => console.log(err))
+        }).catch(err => next(err))
     } else {
         req.flash('validationErrors',validationResult(req).array())
         res.redirect("/cart")
@@ -52,12 +54,12 @@ exports.postSave=(req,res,next)=>{
 exports.postDelete=(req,res,next)=>{
         cartModel.deleteItem(req.body.cartId).then(()=>{
             res.redirect('/cart')
-        }).catch(err => console.log(err))
+        }).catch(err => next(err))
 }
 
 exports.postDeleteAll=(req,res,next)=>{
     // console.log(req.body.items);
     cartModel.deleteAllItems(req.session.userId).then(()=>{
         res.redirect('/cart')
-    }).catch(err => console.log(err))
+    }).catch(err => next(err))
 }

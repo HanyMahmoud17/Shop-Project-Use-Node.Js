@@ -52,6 +52,27 @@ app.use('/cart', cartRouter)
 app.use('/order', orderRouter)
 app.use('/admin', adminRouter)
 
+// handle error
+
+app.get('error',(req,res,next) => {
+    res.status(500)
+    res.render('error.ejs',{
+        isUser:req.session.UserId,
+        isAdmin : req.session.isAdmin
+    })
+})
+app.get('not-admin',(req,res,next) => {
+    res.status(403)
+    res.render('adminError.ejs',{
+        isUser:req.session.UserId,
+        isAdmin : false
+    })
+})
+app.use((error,req,res,next)=>{
+    res.redirect('/error')
+})
+
+
 
 
 

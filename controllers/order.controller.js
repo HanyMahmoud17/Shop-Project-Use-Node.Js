@@ -15,9 +15,11 @@ exports.displayOrderVerificationPage=(req,res,next)=>{
             isUser:true,
             isAdmin:req.session.isAdmin,
             validationError: req.flash('validationErrors')[0],
-            itemData 
+            itemData ,
+            pageTitle:'Checkout',
+
         })
-        // .catch(err=>console.log(err))
+        // .catch(err=>next(err))
 
 }
 
@@ -30,9 +32,11 @@ exports.getOrder = (req, res, next) => {
             items: items,
             isUser:true,
             isAdmin:req.session.isAdmin,
-            validationError: req.flash('validationErrors')[0]
+            validationError: req.flash('validationErrors')[0],
+            pageTitle:'order',
+
         })
-    }).catch(err=>console.log(err))
+    }).catch(err=>next(err))
 };
 
 exports.postOrder = async (req, res, next) => {
@@ -66,11 +70,11 @@ exports.postOrder = async (req, res, next) => {
   exports.orderDelete=(req,res,next)=>{
     orderModel.deleteOrder(req.params.id).then(()=>{
       res.redirect('/order')
-    }).catch(err=>console.log(err))
+    }).catch(err=>next(err))
   }
 
   exports.orderDeleteAll=(req,res,next)=>{
     orderModel.deleteAllOrder(req.session.userId).then(()=>{
       res.redirect('/order')
-    }).catch(err=>console.log(err))
+    }).catch(err=>next(err))
   }
