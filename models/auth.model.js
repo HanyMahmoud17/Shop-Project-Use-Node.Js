@@ -62,3 +62,17 @@ exports.login = (email,password) => {
   })
 };
 
+exports.getUserByEmail = (id) => {
+  return new Promise((resolve, reject) => {
+    User.findOne({ _id: id })
+      .then(user => {
+        if (!user) {
+          reject('Email not found');
+        } else {
+          resolve(user);
+        }
+      })
+      .catch(err => reject(err));
+  });
+};
+

@@ -21,11 +21,10 @@ exports.getProductById=(req,res,next)=>{
         // console.log("product",product);
         res.render('productDetails', {
             product: product,
-            isUser:req.session.isUser,
+            isUser:true,
             isAdmin:req.session.isAdmin,
             validationError: req.flash('validationErrors')[0],
             pageTitle:'Product Details',
-
         })
     })
 

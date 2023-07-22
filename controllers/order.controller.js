@@ -17,17 +17,29 @@ exports.displayOrderVerificationPage=(req,res,next)=>{
             validationError: req.flash('validationErrors')[0],
             itemData ,
             pageTitle:'Checkout',
-
         })
-        // .catch(err=>next(err))
-
 }
+
+exports.displayVerifyPage = (req, res, next) => {
+  orderModel.getAllOrders(req.session.userId)
+    .then(itemData => {
+      res.render('verifyOrder', {
+        isUser: true,
+        isAdmin: req.session.isAdmin,
+        validationError: req.flash('validationErrors')[0],
+        itemData,
+        pageTitle: 'Checkout',
+      });
+    })
+    .catch(err => next(err));
+};
+
 
 
 
 exports.getOrder = (req, res, next) => {
     orderModel.getAllOrders(req.session.userId).then((items)=>{
-        console.log("items",items);
+        // console.log("items",items);
         res.render('order', {
             items: items,
             isUser:true,

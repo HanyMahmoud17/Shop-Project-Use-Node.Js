@@ -10,6 +10,11 @@ authGuard.isAuth
 ,bodyParser.urlencoded({ extended: true}),
 orderController.displayOrderVerificationPage
 );
+router.post('/verifyOrder',
+authGuard.isAuth
+,bodyParser.urlencoded({ extended: true}),
+orderController.displayVerifyPage
+)
 
 router.get('/',orderController.getOrder )
 // Save the order to the database

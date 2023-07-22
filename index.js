@@ -61,6 +61,10 @@ app.get('error',(req,res,next) => {
         isAdmin : req.session.isAdmin
     })
 })
+app.use((error,req,res,next)=>{
+    res.redirect('/error')
+})
+
 app.get('not-admin',(req,res,next) => {
     res.status(403)
     res.render('adminError.ejs',{
@@ -68,8 +72,15 @@ app.get('not-admin',(req,res,next) => {
         isAdmin : false
     })
 })
-app.use((error,req,res,next)=>{
-    res.redirect('/error')
+
+// page not found
+app.use((req,res,next)=>{
+    res.status(404);
+    res.render('not-found',{
+        isUser:req.session.UserId,
+        isAdmin:req.session.isAdmin,
+        pageTitle:'Page Not Found'
+    })
 })
 
 

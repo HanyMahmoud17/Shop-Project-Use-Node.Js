@@ -26,4 +26,13 @@ adminGuard,multer({
 ,adminController.postAdd
 )
 
+router.get('/orders',adminGuard,adminController.getOrders)
+
+router.post('/orders'
+,adminGuard
+,bodyParser.urlencoded({ extended: true }),
+adminController.changeOrderStatus
+
+)
+
 module.exports = router
