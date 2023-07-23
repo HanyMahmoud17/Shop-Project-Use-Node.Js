@@ -4,7 +4,8 @@ const productModel=require('../models/products.model')
 
 exports.getHome = (req, res, next) => {
     let category = req.query.category;
-    let validCategory=['clothes', 'phones','laptops','test']
+    // console.log("category..",category);
+    let validCategory=['clothes', 'phones','laptops']
     let promise;
     if (category && category != 'all' && validCategory.includes(category)) {
       promise = productModel.getProductByCategory(category);

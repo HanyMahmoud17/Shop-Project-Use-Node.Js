@@ -21,12 +21,11 @@ exports.postAdd=(req,res,next)=>{
         description:req.body.description,
         image:req.file.filename,
     }).then(()=>{
-        res.flash('add',true)
-        res.redirect('/add-product')
+        res.redirect('/')
     }).catch(err=>next(err))
     } else {
         req.flash('validationErrors',validationResult(req).array());
-        res.redirect('/add-product');
+        res.redirect('/admin/add');
     }
 }
 

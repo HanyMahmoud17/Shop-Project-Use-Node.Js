@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const db = require('../Config/connectDB');
-const DB_URL = 'mongodb://127.0.0.1:27017/online-shop';
 
 
 const orderSchema = new mongoose.Schema({

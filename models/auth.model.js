@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-// const db = require('../Config/connectDB');
-// const DB_URL = 'mongodb://127.0.0.1:27017/online-shop';
 const bcrypt=require('bcrypt');
 
 const authSchema = mongoose.Schema({
@@ -9,7 +7,7 @@ const authSchema = mongoose.Schema({
   password: String,
   isAdmin:{
     type: Boolean,
-    default: false,
+    default: true,
   }
 });
 

@@ -26,16 +26,15 @@
             <tr>
               <th scope="row"><%= i + 1 %></th>
               <td ><img style="width: 100%; height: 100px;" src="<%= items[i].image %>"></td>
-              <td><%= items[i].name %></td>
+              <td style="max-width: 300px;"><%= items[i].name %></td>
               <td><%= items[i].price %> $</td>
               <form method="post">
-                <td><input type="text" name="amount" value="<%= items[i].amount %>"></td>
+                <td><input type="text" name="amount" style="max-width: 50px;" value="<%= items[i].amount %>"></td>
                 <td><%= items[i].price * items[i].amount %> $</td>
                 <td>
                   <input type="hidden" name="cartId" value="<%= items[i]._id %>">
                   <input type="hidden" name="name" value="<%= items[i].name %>">
                   <input type="hidden" name="price" value="<%= items[i].price %>">
-                  <input type="hidden" name="amount" value="<%= items[i].amount %>">
                   <input type="hidden" name="image" value="<%= items[i].image %>">
                   <input type="hidden" name="productId" value="<%= items[i].productId %>">
                   <input type="submit" class="btn btn-success" value="Save" formaction="/cart/save">
@@ -54,7 +53,7 @@
       </table>
       <div>
       <form method="POST" action="/cart/delete-all" class="text-center">
-        <button type="submit" style="position: absolute;right: 50px;" class="btn btn-danger">Delete All</button>
+        <button type="submit" style="position: absolute;right: 100px;" class="btn btn-danger">Delete All</button>
       </form>
       
       <!-- <form method="POST" action="/order/verifyOrder" class="text-center">

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const db = require('../Config/connectDB');
-const DB_URL = 'mongodb://127.0.0.1:27017/online-shop';
+// const db = require('../Config/connectDB');
+// const DB_URL = 'mongodb://127.0.0.1:27017/online-shop';
 const productSchema = mongoose.Schema({
   name: String,
   price: Number,
@@ -13,7 +13,7 @@ const Product = mongoose.model('product', productSchema);
 
 exports.getAllProducts = () => {
   return new Promise((resolve, reject) => {
-    Product.find({})
+    Product.find({}).lean().exec()
       .then(products => {
         resolve(products);
       })
@@ -23,7 +23,7 @@ exports.getAllProducts = () => {
 
 exports.getProductByCategory = category => {
   return new Promise((resolve, reject) => {
-    Product.find({ category: category })
+    Product.find({ category: category }).lean().exec()
       .then(products => {
         resolve(products);
       })
@@ -33,7 +33,7 @@ exports.getProductByCategory = category => {
 
 exports.getProductById = id => {
   return new Promise((resolve, reject) => {
-    Product.findById(id)
+    Product.findById(id).lean().exec()
       .then(product => {
         resolve(product);
       })
@@ -43,7 +43,7 @@ exports.getProductById = id => {
 
 exports.getFirstProduct = () => {
   return new Promise((resolve, reject) => {
-    Product.findOne()
+    Product.findOne().lean().exec()
       .then(product => {
         resolve(product);
       })

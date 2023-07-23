@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const DB_URL = 'mongodb://127.0.0.1:27017/online-shop';
+const DB_URL = 'mongodb+srv://HanyMahmoud:9D5X7dxDtfHvhyfn@cluster0.iajcykd.mongodb.net/online-shop?retryWrites=true&w=majority';
 
 mongoose.connect(DB_URL, {
   useNewUrlParser: true,

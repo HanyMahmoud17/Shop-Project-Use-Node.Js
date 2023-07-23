@@ -7,7 +7,6 @@ const authGuard=require('./guards/auth.guard')
 
 
 router.get('/signup',authGuard.notAuth,authController.getSignup )
-
 router.post('/signup',authGuard.notAuth,
 // i use bodyParser to get data from form and this is middle where and i use bodyParser to use model qs instead of query string    
 bodyParser.urlencoded({ extended: true }),
@@ -22,7 +21,6 @@ authController.postSignup
 )
 
 router.get('/login',authGuard.notAuth,authController.getLogin )
-
 router.post('/login',authGuard.notAuth,
 bodyParser.urlencoded({ extended: true }),
 check('email').not().isEmpty().withMessage('Enter your email').isEmail().withMessage('Enter valid Email'),
@@ -32,6 +30,5 @@ authController.postLogin
 
 // if the user make any of post or get to handlr this router
 router.all('/logout',authGuard.isAuth, authController.logout)
-
 
 module.exports = router

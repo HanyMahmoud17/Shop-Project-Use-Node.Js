@@ -31,7 +31,7 @@
             <tr>
               <td scope="row"><%= i + 1 %></td>
               <td><img style="width: 80%; height: 100px;" src="<%= items[i].cartItems[j].image %>"></td>
-              <td><%= items[i].cartItems[j].name %></td>
+              <td style="max-width: 200px;"><%= items[i].cartItems[j].name %></td>
               <td><%= items[i].cartItems[j].amount %></td>
               <td><%= items[i].cartItems[j].price * items[i].cartItems[j].amount %> $</td>
               <td><%= items[i].orderAddress %></td>

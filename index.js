@@ -18,7 +18,7 @@ const SessionStore= require('connect-mongodb-session')(session)
 
 // not create store to session  
 const STORE=new SessionStore({
-    uri:'mongodb://127.0.0.1:27017/online-shop',
+    uri:'mongodb+srv://HanyMahmoud:9D5X7dxDtfHvhyfn@cluster0.iajcykd.mongodb.net/online-shop?retryWrites=true&w=majority',
     collection: 'sessions'
 })
 
@@ -53,7 +53,6 @@ app.use('/order', orderRouter)
 app.use('/admin', adminRouter)
 
 // handle error
-
 app.get('error',(req,res,next) => {
     res.status(500)
     res.render('error.ejs',{
@@ -77,8 +76,8 @@ app.get('not-admin',(req,res,next) => {
 app.use((req,res,next)=>{
     res.status(404);
     res.render('not-found',{
-        isUser:req.session.UserId,
-        isAdmin:req.session.isAdmin,
+        isUser:false,
+        isAdmin:false,
         pageTitle:'Page Not Found'
     })
 })
@@ -100,7 +99,9 @@ app.get('/',(req,res,next)=>{
 //     res.send('hello world');
 // })
 
-app.listen(3000,(err)=>{
+const port=process.env.PORT || 3000
+
+app.listen(port,(err)=>{
     // console.log(err);
     console.log('server listening on 3000');
 })
